@@ -14,6 +14,9 @@ bindings = [
   { name = "rooms", class_name = "ChatRoom" }
 ]
 
+[observability]
+enabled = false
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["ChatRoom"]
