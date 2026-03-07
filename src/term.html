@@ -94,7 +94,8 @@
     ws.addEventListener("message", (event) => {
       let data = JSON.parse(event.data);
       if (data.name === "tmux") {
-        termContent.innerHTML = atob(data.message);
+        const bytes = Uint8Array.from(atob(data.message), c => c.charCodeAt(0));
+        termContent.innerHTML = new TextDecoder().decode(bytes);
         termContent.scrollTop = termContent.scrollHeight
       } else if (data.quit === "tmux") {
         termContent.style.opacity = "0.5";
