@@ -1,4 +1,4 @@
-import HTML from "term.html";
+import HTML from "./term.html";
 
 // `handleErrors()` is a little utility function that can wrap an HTTP request handler in a
 // try/catch and return errors to the client. You probably wouldn't want to use this in production
@@ -31,7 +31,7 @@ export default {
       let path = url.pathname.slice(1).split("/");
 
       if (!path[0]) {
-        return Response.redirect("https://github.com/bjesus/muxile", 307);
+        return Response.redirect("https://github.com/wturnerharris/muxile", 307);
       }
 
       switch (path[0]) {
@@ -207,7 +207,7 @@ export class ChatRoom {
         this.broadcast(dataStr);
 
         // Save message.
-        let key = new Date(data.timestamp).toISOString();
+        let key = new Date().toISOString();
         await this.storage.put(key, dataStr);
       } catch (err) {
         // Report any exceptions directly back to the client. As with our handleErrors() this
