@@ -76,7 +76,9 @@
       <button onclick="this.classList.toggle('toggled');">Ctrl</button>
     </div>
   </body>
-  <script type="text/javascript">
+  <script type="module">
+    import { AnsiUp } from "https://cdn.jsdelivr.net/npm/ansi_up@6.0.2/ansi_up.min.js";
+    const ansi_up = new AnsiUp();
     const termContent = document.querySelector("#term-content");
     const roomId = window.location.pathname.split("/").slice(-1);
     const ctrl = document.getElementsByTagName("button")[0];
@@ -95,7 +97,8 @@
       let data = JSON.parse(event.data);
       if (data.name === "tmux") {
         const bytes = Uint8Array.from(atob(data.message), c => c.charCodeAt(0));
-        termContent.innerHTML = new TextDecoder().decode(bytes);
+        const text = new TextDecoder().decode(bytes);
+        termContent.innerHTML = ansi_up.ansi_to_html(text);
         termContent.scrollTop = termContent.scrollHeight
       } else if (data.quit === "tmux") {
         termContent.style.opacity = "0.5";
