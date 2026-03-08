@@ -15,7 +15,9 @@ bindings = [
 ]
 
 [observability]
-enabled = false
+[observability.logs]
+enabled = true
+invocation_logs = true
 
 [[migrations]]
 tag = "v1"
